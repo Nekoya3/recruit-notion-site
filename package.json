@@ -1,0 +1,34 @@
+{
+  "name": "recruit-notion-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
+  },
+  "dependencies": {
+    "axios": "^0.21.4",
+    "core-js": "^3.17.3",
+    "nuxt": "^2.15.8",
+    "nuxt-webfontloader": "^1.1.0",
+    "vue-notion-render": "^1.1.4",
+    "vuetify": "^2.5.8"
+  },
+  "devDependencies": {
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@mdi/js": "^6.1.95",
+    "@nuxtjs/fontawesome": "^1.1.2",
+    "@nuxtjs/vuetify": "^1.12.1",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^7.17.0",
+    "nuxt-purgecss": "^1.0.0",
+    "prettier": "^2.4.0"
+  }
+}
