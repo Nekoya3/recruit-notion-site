@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import VueNotionRender from "vue-notion-render";
 
 export default {
