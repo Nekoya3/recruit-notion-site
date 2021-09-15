@@ -83,7 +83,7 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["nuxt-webfontloader", "@nuxtjs/proxy"],
+  modules: ["nuxt-webfontloader", "@nuxtjs/proxy", "@nuxtjs/axios"],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -109,7 +109,10 @@ export default {
     BASE_URL: process.env.VERCEL_URL,
   },
 
-  // proxy: ["https://notion-api.splitbee.io/v1/page/*"],
+  axios: {
+    proxy: true,
+  },
+
   proxy: {
     "/v1/": {
       target: "https://notion-api.splitbee.io",

@@ -25,7 +25,7 @@ export default {
     async asyncData() {
       const id = this.$config.notionID;
       const token = this.$config.notionPageID;
-      const data = await axios.get(`${this.$config.BASE_URL}/v1/page/` + id, {
+      const data = await this.$axios.get(`${this.$config.BASE_URL}/v1/page/` + id, {
         headers: { Authorization: `Bearer ${token}` },
       });
       this.item = await data.data;
