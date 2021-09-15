@@ -1,16 +1,25 @@
+const baseHost = process.env.BASE_HOST || "http://localhost:3000";
+const description =
+  "見たい未来は、自分でつくる  社会を変える力は我々ひとりひとりの中にある。 世の中づくりを面白く。 ともに考え、ともにつくろう。";
+const siteTitle = "Recruit - Code for Japan";
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: "%s - recruit-notion-site",
-    title: "recruit-notion-site",
+    title: siteTitle,
     htmlAttrs: {
-      lang: "en",
+      lang: "ja",
     },
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" },
+      { hid: "description", name: "description", content: description },
       { name: "format-detection", content: "telephone=no" },
+      { hid: "og:locale", property: "og:locale", content: "ja_JP" },
+      { hid: "og:type", property: "og:type", content: "article" },
+      { hid: "og:url", property: "og:url", content: baseHost },
+      { hid: "og:title", property: "og:title", content: siteTitle },
+      { hid: "og:description", property: "og:description", content: description },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
@@ -29,6 +38,7 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     "@nuxtjs/vuetify",
     "@nuxtjs/fontawesome",
+    "nuxt-purgecss",
   ],
 
   fontawesome: {
@@ -37,8 +47,43 @@ export default {
     },
   },
 
+  purgeCSS: {
+    enabled: ({ isDev }) => !isDev,
+    paths: [
+      "components/**/*.vue",
+      "layouts/**/*.vue",
+      "pages/**/*.vue",
+      "plugins/**/*.js",
+      "./node_modules/vuetify/dist/vuetify.js",
+    ],
+    styleExtensions: [".css"],
+    // whitelist: ['body', 'html', 'nuxt-progress', ''],
+
+    whitelist: ["v-application", "v-application--wrap", "layout", "row", "col"],
+    whitelistPatterns: [
+      /^v-((?!application).)*$/,
+      /^theme--*/,
+      /.*-transition/,
+      /^justify-*/,
+      /^p*-[0-9]/,
+      /^m*-[0-9]/,
+      /^text--*/,
+      /--text$/,
+      /^row-*/,
+      /^col-*/,
+    ],
+    whitelistPatternsChildren: [/^v-((?!application).)*$/, /^theme--*/],
+
+    extractors: [
+      {
+        extractor: (content) => content.match(/[A-z0-9-:\\/]+/g) || [],
+        extensions: ["html", "vue", "js"],
+      },
+    ],
+  },
+
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["nuxt-webfontloader"],
+  modules: ["nuxt-webfontloader", "@nuxtjs/proxy"],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -46,19 +91,22 @@ export default {
     defaultAssets: {
       font: false,
     },
+    treeShake: true,
   },
 
   webfontloader: {
     google: {
-      families: ["Montserrat:wght@400;700&display=swap"],
+      families: ["Montserrat:400,700"],
     },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: { extractCSS: true },
 
   publicRuntimeConfig: {
     notionID: process.env.NOTION_ID,
     notionPageID: process.env.NOTION_PAGE_ID,
   },
+
+  proxy: ["https://notion-api.splitbee.io/v1/page/*"],
 };

@@ -1,12 +1,18 @@
 <template>
   <v-app>
-    <v-app-bar fixed app color="white">
+    <v-app-bar fixed flat app color="white" extension-height="30">
       <v-app-bar-title class="header">
         <a href="https://www.code4japan.org" rel="noreferrer">
-          <v-img class="logo" contain width="13rem" :src="logo_image"></v-img>
+          <v-img class="logo" contain width="14rem" :src="logo_image"></v-img>
         </a>
       </v-app-bar-title>
       <v-spacer />
+      <template #extension>
+        <ul :class="$vuetify.breakpoint.xs ? 'breadcrumb sm' : 'breadcrumb'">
+          <li><a href="https://www.code4japan.org">HOME</a></li>
+          <li><span>Recruit</span></li>
+        </ul>
+      </template>
     </v-app-bar>
     <v-main app>
       <v-container>
@@ -132,42 +138,101 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .v-application {
   font-family: "Montserrat", "游ゴシック", YuGothic, "Noto Sans JP", sans-serif !important;
-}
 
-.header {
-  padding: 15px 3%;
-}
-.link-footer {
-  background-color: #202020 !important;
-  color: #9b9b9b !important;
-  font-size: 0.8rem;
-
-  .container {
-    padding-top: 40px;
-    padding-bottom: 40px;
+  .header {
+    padding: 15px 3% 10px;
   }
+  .link-footer {
+    background-color: #202020 !important;
+    color: #9b9b9b !important;
+    font-size: 0.8rem;
 
-  .item {
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem;
-  }
+    .container {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
 
-  a {
-    color: #9b9b9b;
-    text-decoration: none;
-  }
+    .item {
+      padding-top: 0.2rem;
+      padding-bottom: 0.2rem;
+    }
 
-  p {
-    font-weight: bold;
     a {
-      color: white !important;
+      color: #9b9b9b;
       text-decoration: none;
     }
 
-    margin-bottom: 0.5rem;
+    p {
+      font-weight: bold;
+      a {
+        color: white !important;
+        text-decoration: none;
+      }
+
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .v-toolbar__content {
+    padding: 0 !important;
+  }
+
+  .v-toolbar__extension {
+    padding: 0 !important;
+    background: #faf9f3;
+  }
+
+  ul {
+    list-style: none;
+    display: block;
+    padding-inline-start: 40px;
+  }
+
+  .breadcrumb {
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.8rem;
+    width: 100%;
+
+    li {
+      text-align: -webkit-match-parent;
+      display: inline-block;
+    }
+
+    li:not(:last-child):after {
+      -webkit-font-smoothing: antialiased;
+      display: inline-block;
+      font-weight: 900;
+      font-style: normal;
+      font-variant: normal;
+      text-rendering: auto;
+      line-height: inherit;
+      content: "＞";
+      margin: 0 0.5em;
+      opacity: 0.3;
+    }
+
+    a {
+      -webkit-transition: all 0.3s ease 0s;
+      transition: all 0.3s ease 0s;
+      text-decoration: none;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    a {
+      display: inline-block;
+      color: #e5001c;
+    }
+  }
+
+  .sm {
+    font-size: 0.6rem;
+    padding-left: 0.6rem;
   }
 }
 </style>

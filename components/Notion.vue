@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <vue-notion-render :unofficial="true" :data="item" />
+  <div class="notion-header">
+    <vue-notion-render :unofficial="true" :data="item" class="mt-5" />
   </div>
 </template>
 
@@ -25,16 +25,18 @@ export default {
     async asyncData() {
       const id = this.$config.notionID;
       const token = this.$config.notionPageID;
-      const data = await axios.get("https://notion-api.splitbee.io/v1/page/" + id, {
+      const data = await axios.get("/v1/page/" + id, {
         headers: { Authorization: `Bearer ${token}` },
       });
       this.item = await data.data;
-      return {
-        ITEM: data,
-      };
+      console.log(this.item);
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.notion-header {
+  margin-bottom: 3rem;
+}
+</style>
