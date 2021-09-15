@@ -1,4 +1,4 @@
-const baseHost = process.env.BASE_HOST || "http://localhost:3000";
+const baseHost = process.env.VERCEL_URL || "http://localhost:3000";
 const description =
   "見たい未来は、自分でつくる  社会を変える力は我々ひとりひとりの中にある。 世の中づくりを面白く。 ともに考え、ともにつくろう。";
 const siteTitle = "Recruit - Code for Japan";
@@ -106,7 +106,15 @@ export default {
   publicRuntimeConfig: {
     notionID: process.env.NOTION_ID,
     notionPageID: process.env.NOTION_PAGE_ID,
+    BASE_URL: process.env.VERCEL_URL,
   },
 
-  proxy: ["https://notion-api.splitbee.io/v1/page/*"],
+  // proxy: ["https://notion-api.splitbee.io/v1/page/*"],
+  proxy: {
+    "/v1/": {
+      target: "https://notion-api.splitbee.io",
+      changeOrigin: true,
+      secure: false,
+    },
+  },
 };
