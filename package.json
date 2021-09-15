@@ -22,6 +22,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@mdi/js": "^6.1.95",
     "@nuxtjs/fontawesome": "^1.1.2",
+    "@nuxtjs/vercel-builder": "^0.21.3",
     "@nuxtjs/vuetify": "^1.12.1",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
