@@ -5,5 +5,11 @@
       "src": "nuxt.config.js",
       "use": "@nuxtjs/vercel-builder"
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/v1/:match*",
+      "destination": "https://notion-api.splitbee.io/v1/:match*"
+    }
   ]
 }
