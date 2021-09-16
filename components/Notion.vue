@@ -12,22 +12,10 @@ export default {
   components: {
     VueNotionRender,
   },
-  data() {
-    return {
-      item: {},
-    };
-  },
-  async created() {
-    await this.asyncData();
-  },
-  methods: {
-    async asyncData() {
-      const id = this.$config.notionID;
-      const token = this.$config.notionPageID;
-      const data = await this.$axios.get(`${this.$config.BASE_URL}/v1/page/` + id, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      this.item = await data.data;
+  props: {
+    item: {
+      type: Object,
+      required: true,
     },
   },
 };
